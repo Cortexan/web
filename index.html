@@ -141,6 +141,43 @@
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 
+    // Add event listeners for touch events
+    document.addEventListener('DOMContentLoaded', function() {
+        var touchstartX = 0;
+        var touchendX = 0;
+        
+        const slider = document.querySelector('body'); // Change this selector to your swipeable area
+
+        function handleGesture() {
+            if (touchendX + 100 < touchstartX) {
+                changeTab('next');
+            }
+            
+            if (touchendX - 100 > touchstartX) {
+                changeTab('prev');
+            }
+        }
+
+        slider.addEventListener('touchstart', function(event) {
+            touchstartX = event.changedTouches[0].screenX;
+        }, false);
+
+        slider.addEventListener('touchend', function(event) {
+            touchendX = event.changedTouches[0].screenX;
+            handleGesture();
+        }, false);
+    });
+
+    function changeTab(direction) {
+        var tabs = Array.from(document.getElementsByClassName('tablinks'));
+        var activeTab = tabs.findIndex(tab => tab.className.includes('active'));
+        if (direction === 'next' && activeTab < tabs.length - 1) {
+            tabs[activeTab + 1].click();
+        } else if (direction === 'prev' && activeTab > 0) {
+            tabs[activeTab - 1].click();
+        }
+    }
+
     // Open the first tab by default, but don't autoplay on mobile
     document.addEventListener("DOMContentLoaded", function() {
         document.querySelector('.tablinks').click();
