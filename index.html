@@ -132,14 +132,30 @@
         for (i = 0; i < tablinks.length; i++) {
             tablinks[i].className = tablinks[i].className.replace(" active", "");
         }
+        var videoElement = document.getElementById(videoName).querySelector("video");
         document.getElementById(videoName).style.display = "block";
         evt.currentTarget.className += " active";
-        document.getElementById(videoName).querySelector("video").play();
+
+        // Play video only if not on a mobile device
+        if (!isMobileDevice()) {
+            videoElement.play();
+        }
     }
 
-    // Open the first tab by default
+    function isMobileDevice() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
+    // Open the first tab and play video by default if not on mobile
     document.addEventListener("DOMContentLoaded", function() {
-        document.querySelector('.tablinks').click();
+        var firstTab = document.querySelector('.tablinks');
+        firstTab.click();
+        if (!isMobileDevice()) {
+            var firstVideo = document.querySelector('.tabcontent video');
+            if (firstVideo) {
+                firstVideo.play();
+            }
+        }
     });
 </script>
 
