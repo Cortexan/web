@@ -134,7 +134,7 @@
         }
         document.getElementById(videoName).style.display = "block";
         evt.currentTarget.className += " active";
-        document.getElementById(videoName).querySelector("video").play(); // Autoplay when tab is opened
+        document.getElementById(videoName).querySelector("video").play(); // Autoplay the video in the active tab
     }
 
     // Check for mobile device
@@ -179,13 +179,9 @@
         }
     }
 
-    // Open the first tab by default and autoplay the first video
+    // Open the first tab by default
     document.addEventListener("DOMContentLoaded", function() {
         document.querySelector('.tablinks').click();
-        var firstVideo = document.querySelector('.tabcontent video');
-        if (firstVideo) {
-            firstVideo.play();
-        }
     });
 </script>
 
