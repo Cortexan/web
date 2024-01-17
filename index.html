@@ -100,27 +100,27 @@
 </div>
 
 <div id="Video1" class="tabcontent">
-  <video controls autoplay loop muted>
-    <source src="25_1200.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-</div>
+    <video controls loop muted playsinline>
+      <source src="25_1200.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
 
-<div id="Video2" class="tabcontent">
-  <video controls autoplay loop muted>
-    <source src="50_1200.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-</div>
+  <div id="Video2" class="tabcontent">
+    <video controls loop muted playsinline>
+      <source src="50_1200.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
 
-<div id="Video3" class="tabcontent">
-  <video controls autoplay loop muted>
-    <source src="100_1200.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-</div>
+  <div id="Video3" class="tabcontent">
+    <video controls loop muted playsinline>
+      <source src="100_1200.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
 
-<script>
+  <script>
     function openVideo(evt, videoName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
@@ -132,24 +132,18 @@
         for (i = 0; i < tablinks.length; i++) {
             tablinks[i].className = tablinks[i].className.replace(" active", "");
         }
-        var videoElement = document.getElementById(videoName).querySelector("video");
         document.getElementById(videoName).style.display = "block";
         evt.currentTarget.className += " active";
-
-        // Play video only if not on a mobile device
-        if (!isMobileDevice()) {
-            videoElement.play();
-        }
     }
 
+    // Check for mobile device
     function isMobileDevice() {
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 
-    // Open the first tab and play video by default if not on mobile
+    // Open the first tab by default, but don't autoplay on mobile
     document.addEventListener("DOMContentLoaded", function() {
-        var firstTab = document.querySelector('.tablinks');
-        firstTab.click();
+        document.querySelector('.tablinks').click();
         if (!isMobileDevice()) {
             var firstVideo = document.querySelector('.tabcontent video');
             if (firstVideo) {
